@@ -17,6 +17,7 @@
 package com.eyepetizer.android.ui.home.discovery
 
 import android.graphics.Rect
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -128,6 +129,7 @@ class DiscoveryAdapter(val fragment: DiscoveryFragment, val dataList: List<Disco
                 setOnClickListener(holder.tvRightText, holder.ivInto) { "${item.data.header.rightText},${GlobalUtil.getString(R.string.currently_not_supported)}".showToast() }
                 holder.recyclerView.setHasFixedSize(true)
                 holder.recyclerView.isNestedScrollingEnabled = true
+                //TODO 热门分类(水平布局)
                 holder.recyclerView.layoutManager = GridLayoutManager(fragment.activity, 2).apply { orientation = GridLayoutManager.HORIZONTAL }
                 if (holder.recyclerView.itemDecorationCount == 0) {
                     holder.recyclerView.addItemDecoration(SpecialSquareCardCollectionItemDecoration())
@@ -216,6 +218,7 @@ class DiscoveryAdapter(val fragment: DiscoveryFragment, val dataList: List<Disco
         }
     }
 
+    // 顶部Banner
     inner class HorizontalScrollCardAdapter : BaseBannerAdapter<Discovery.ItemX, HorizontalScrollCardAdapter.ViewHolder>() {
 
         inner class ViewHolder(val view: View) : BaseViewHolder<Discovery.ItemX>(view) {
@@ -242,6 +245,7 @@ class DiscoveryAdapter(val fragment: DiscoveryFragment, val dataList: List<Disco
         }
     }
 
+    //TODO 热门分类
     inner class SpecialSquareCardCollectionAdapter(val dataList: List<Discovery.ItemX>) : RecyclerView.Adapter<SpecialSquareCardCollectionAdapter.ViewHolder>() {
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -260,9 +264,12 @@ class DiscoveryAdapter(val fragment: DiscoveryFragment, val dataList: List<Disco
             holder.ivPicture.load(item.data.image, 4f)
             holder.tvTitle.text = item.data.title
             holder.itemView.setOnClickListener { "${item.data.title},${GlobalUtil.getString(R.string.currently_not_supported)}".showToast() }
+
+            Log.d("热门分类" , "标题= "+ item.data.title +"；图片= "+ item.data.image)
         }
     }
 
+    // 专题策划
     inner class ColumnCardListAdapter(val dataList: List<Discovery.ItemX>) : RecyclerView.Adapter<ColumnCardListAdapter.ViewHolder>() {
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -284,6 +291,7 @@ class DiscoveryAdapter(val fragment: DiscoveryFragment, val dataList: List<Disco
         }
     }
 
+    //
     inner class SpecialSquareCardCollectionItemDecoration : RecyclerView.ItemDecoration() {
 
         override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {

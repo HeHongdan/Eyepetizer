@@ -116,6 +116,7 @@ data class Discovery(val itemList: List<Item>, val count: Int, val total: Int, v
         val description: String
     )
 
+    //TODO 热门分类
     data class ItemX(val adIndex: Int, val `data`: DataX, val id: Int, val tag: Any, val type: String)
 
     data class DataX(
